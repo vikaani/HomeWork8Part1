@@ -3,12 +3,9 @@
 //  Lesson8HW
 //
 
-//
-
 import UIKit
 
 class YellowViewController: UIViewController {
-    
     var printer: Printer!
     
     override func viewDidLoad() {
@@ -16,13 +13,16 @@ class YellowViewController: UIViewController {
         setupUI()
         setup()
     }
-    
+}
+
+// MARK: - PrinterDelegate
+extension YellowViewController: PrinterDelegate {
     func textToPrint() -> String {
         return "🚖 - жовте таксі у дорозі"
     }
 }
 
-//MARK: - Private
+// MARK: - Private
 private extension YellowViewController {
     
     func setupUI() {
@@ -40,9 +40,8 @@ private extension YellowViewController {
     }
     
     func setup() {
-        
         printer = Printer()
-        printer.yellowViewController = self
+        printer.delegate = self
         
         printer.startPrinting()
     }

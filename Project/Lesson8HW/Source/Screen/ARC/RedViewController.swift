@@ -3,12 +3,9 @@
 //  Lesson8HW
 //
 
-//
-
 import UIKit
 
 class RedViewController: UIViewController {
-    
     var printer: Printer!
     
     override func viewDidLoad() {
@@ -16,7 +13,9 @@ class RedViewController: UIViewController {
         setupUI()
         setup()
     }
-    
+}
+// MARK: - PrinterDelegate
+extension RedViewController: PrinterDelegate {
     func textToPrint() -> String {
         return "🚗 - червоне таксі у дорозі"
     }
@@ -24,7 +23,6 @@ class RedViewController: UIViewController {
 
 //MARK: - Private
 private extension RedViewController {
-    
     func setupUI() {
         view.backgroundColor = .lightRed
         
@@ -40,9 +38,8 @@ private extension RedViewController {
     }
     
     func setup() {
-        
         printer = Printer()
-        printer.redViewController = self
+        printer.delegate = self
         
         printer.startPrinting()
     }

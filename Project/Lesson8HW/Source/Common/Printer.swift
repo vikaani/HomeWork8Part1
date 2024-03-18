@@ -3,15 +3,14 @@
 //  Lesson8HW
 //
 
-//
+import UIKit
 
-import Foundation
+protocol PrinterDelegate: AnyObject {
+    func textToPrint() -> String
+}
 
 class Printer {
-    
-    var yellowViewController: YellowViewController?
-    var blueViewController: BlueViewController?
-    var redViewController: RedViewController?
+    weak var delegate: PrinterDelegate?
     
     private var timer: Timer?
     private var seconds: Int = 0
@@ -27,6 +26,7 @@ class Printer {
             userInfo: nil,
             repeats: true
         )
+        
     }
     
     func stop() {
@@ -34,20 +34,11 @@ class Printer {
     }
     
     @objc private func timerAction() {
-        
+        guard let delegate else { return }
+
         let secondsText = "\(seconds) секунд"
         
-        if let textToPrint = yellowViewController?.textToPrint() {
-            print("\(textToPrint) \(secondsText)")
-        }
-        
-        if let textToPrint = blueViewController?.textToPrint() {
-            print("\(textToPrint) \(secondsText)")
-        }
-        
-        if let textToPrint = redViewController?.textToPrint() {
-            print("\(textToPrint) \(secondsText)")
-        }
+        print("\(delegate.textToPrint()) \(secondsText)")
         
         seconds += 1
     }

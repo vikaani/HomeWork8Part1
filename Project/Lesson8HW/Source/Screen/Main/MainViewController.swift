@@ -3,8 +3,6 @@
 //  Lesson8HW
 //
 
-//
-
 import UIKit
 
 class MainViewController: UIViewController {

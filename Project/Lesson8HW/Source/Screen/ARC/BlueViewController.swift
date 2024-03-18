@@ -3,12 +3,9 @@
 //  Lesson8HW
 //
 
-//
-
 import UIKit
 
 class BlueViewController: UIViewController {
-    
     var printer: Printer!
     
     override func viewDidLoad() {
@@ -16,7 +13,10 @@ class BlueViewController: UIViewController {
         setupUI()
         setup()
     }
-    
+}
+
+// MARK: - PrinterDelegate
+extension BlueViewController: PrinterDelegate {
     func textToPrint() -> String {
         return "🚙 - синє таксі у дорозі"
     }
@@ -24,7 +24,6 @@ class BlueViewController: UIViewController {
 
 //MARK: - Private
 private extension BlueViewController {
-    
     func setupUI() {
         view.backgroundColor = .lightBlue
         
@@ -40,9 +39,8 @@ private extension BlueViewController {
     }
     
     func setup() {
-        
         printer = Printer()
-        printer.blueViewController = self
+        printer.delegate = self
         
         printer.startPrinting()
     }
